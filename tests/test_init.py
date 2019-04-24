@@ -1,4 +1,6 @@
 import pytest
+from ie_pandas import DataFrame
+
 
 def input_type_test():
     """This test checks to make sure only dictionaries are allowed"""
@@ -14,11 +16,13 @@ def input_value_test():
     with pytest.raises(ValueError):
         assert DataFrame(input_dic)
 
+
 def input_length_test():
     """This test checks to make sure columns are of the same length"""
     input_dic = {"a": [1, 2, 3], "b": [3, 4, 5, 6]}
     with pytest.raises(ValueError):
         assert DataFrame(input_dic)
+
 
 def input_same_value_test():
     """This test checks to make sure values in each columns are of the same type"""
