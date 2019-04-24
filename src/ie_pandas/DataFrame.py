@@ -64,8 +64,9 @@ class DataFrame:
                     l.append(v)
                 self.values = l
 
-    def __getitem__(self, colname):
-        """ This function returns the values of the called column"""
+    def __getitem__(self,colname):
+        ''' This function returns the values of the called column'''
+        colname = colname if isinstance(colname, list) else [colname]
         return [self.df[x] for x in colname]
 
     def __setitem__(self, colname, value):
