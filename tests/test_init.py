@@ -1,4 +1,6 @@
 import pytest
+import numpy as np
+from ie_pandas.DataFrame import DataFrame
 
 
 def test_input_type():
