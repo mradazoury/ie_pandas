@@ -30,9 +30,3 @@ def test_input_same_value():
     input_dic = {"a": [1, 2, 3, "g"], "b": [3, 4, 5, 6]}
     with pytest.raises(ValueError):
         assert DataFrame(input_dic)
-        
-
-    
-
-        
-
