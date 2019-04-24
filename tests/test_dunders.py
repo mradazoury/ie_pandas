@@ -1,5 +1,5 @@
 import pytest
-from ie-pandas import DataFrame
+from ie_pandas import DataFrame
 
 @pytest.mark.parametrize("df , expected",[({'name':['Georges','Alexandre','Kelly'],
                                            'Family': ['Koury', 'Trump', 'McKinsey'],
