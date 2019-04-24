@@ -66,8 +66,12 @@ class DataFrame:
 
     def __getitem__(self,colname):
         ''' This function returns the values of the called column'''
-        colname = colname if isinstance(colname, list) else [colname]
-        return [self.df[x] for x in colname]
+        if isinstance(colname, str):
+            return [self.df[colname]]
+        elif isinstance(colname, (list, tuple)): 
+            return [self.df[x] for x in colname]
+        else:
+            raise Exception()
 
     def __setitem__(self, colname, value):
         """ This function sets the values of the called column"""
