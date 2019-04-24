@@ -62,3 +62,34 @@ class dataframe:
                 for v in df.values():
                     l.append(v)
                 self.values = l
+
+    def __getitem__(self, colname):
+        """ This function returns the values of the called column"""
+        return [self.df[x] for x in colname]
+
+    def __setitem__(self, colname, value):
+        """ This function sets the values of the called column"""
+        self.df[colname] = value
+
+    def __repr__(self):
+        returnString = (
+            str(list(self.df.keys()))
+            + "\n"
+            + str(np.transpose(np.array(list(self.df.values()), dtype="O")))
+        )
+        return returnString
+
+    def colnames(self):
+        """ This method returns the name of columns"""
+        l = []
+        for k in self.keys:
+            l.append(str(k))
+        return l
+
+    def get_row(self, index_start, index_end):
+        """ This method returns the cited rows"""
+        dummy = dict()
+        for k in self.keys:
+            dummy[k] = (self.df[k])[index_start:index_end]
+
+        return dummy
