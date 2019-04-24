@@ -1,16 +1,12 @@
-class dataframe:
+class DataFrame:
     def __init__(self, df):
 
         # checking the type to make sure it is a dicitonary
         if type(df) != dict:
             raise ValueError("Wrong input type, Only dictionaries are acceptable")
-
-        else:
-            l = []
-            for i in df.values():
-                l.append(len(i))
-
-        # Only letting list and numpy array to be set as values in the dictionary
+        
+        
+            # Only letting list and numpy array to be set as values in the dictionary
         for i in df.values():
             if isinstance(i, (list, np.ndarray)):
                 pass
@@ -18,6 +14,10 @@ class dataframe:
                 raise ValueError(
                     " Only dictionaries of list or Numpy array are acccepted"
                 )
+                
+        l = []
+        for i in df.values():
+            l.append(len(i))
 
         # making sure that all columns are of same length
         if len(set(l)) > 1:
