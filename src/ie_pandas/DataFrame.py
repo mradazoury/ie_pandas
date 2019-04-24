@@ -93,3 +93,36 @@ class dataframe:
             dummy[k] = (self.df[k])[index_start:index_end]
 
         return dummy
+    
+    #mathematical functions
+    def sum(self):   ### fix it to be just for numerical  -- done  --- works without ie_
+        ''' This method returns a dictionary including the sum of all columns'''
+        d=dict()
+        for k in self.keys:
+            if(np.issubdtype(np.array(self.df[k]).dtype, np.number)):
+                d[k]=sum(self.df[k])
+        return d
+    
+    def median(self):
+        ''' This method returns a dictionary including the median of all columns'''
+        d=dict()
+        for k in self.keys:
+            if(np.issubdtype(np.array(self.df[k]).dtype, np.number)):
+                d[k]=np.median(self.df[k])
+        return d
+    
+    def min(self):
+        ''' This method returns a dictionary including the min of all columns'''
+        d=dict()
+        for k in self.keys:
+            if(np.issubdtype(np.array(self.df[k]).dtype, np.number)):
+                d[k]=np.min(self.df[k])
+        return d
+    
+    def max(self):
+        ''' This method returns a dictionary including the max of all columns'''
+        d=dict()
+        for k in self.keys:
+            if(np.issubdtype(np.array(self.df[k]).dtype, np.number)):
+                d[k]=np.max(self.df[k])
+        return d
