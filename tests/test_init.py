@@ -31,9 +31,12 @@ def test_input_same_value():
     with pytest.raises(ValueError):
         assert DataFrame(input_dic)
         
+'''tests for mathematical functions sum, median, min and max'''
+math_dic = {'A': [1, 2, 3, 4, 5], 'B': [6, 7, 8, 9, 10], 'C': ['a', 'b', 'c', 'd', 'e']}
+df = dataframe(math_dic)
+        
 def test_sum():
     ''' Test and compare the results from the sum function against the expected results'''
-    df = dataframe({'A': [1, 2, 3, 4, 5], 'B': [6, 7, 8, 9, 10], 'C': ['a', 'b', 'c', 'd', 'e']})
     result = df.sum()
     expected = {'A': 15, 'B': 40}
     assert result == expected
@@ -41,7 +44,6 @@ def test_sum():
 
 def test_median():
         ''' Test and compare the results from the median function against the expected results'''
-        df = dataframe({'A': [1, 2, 3, 4, 5], 'B': [6, 7, 8, 9, 10], 'C': ['a', 'b', 'c', 'd', 'e']})
         result = df.median()
         expected = {'A': 3, 'B': 8}
         assert result == expected
@@ -49,7 +51,6 @@ def test_median():
         
 def test_min():
         ''' Test and compare the results from the min function against the expected results'''
-        df = dataframe({'A': [1, 2, 3, 4, 5], 'B': [6, 7, 8, 9, 10], 'C': ['a', 'b', 'c', 'd', 'e']})
         result = df.min()
         expected = {'A': 1, 'B': 6}
         assert result == expected
@@ -57,7 +58,6 @@ def test_min():
         
 def test_max():
         ''' Test and compare the results from the max function against the expected results'''
-        df = dataframe({'A': [1, 2, 3, 4, 5], 'B': [6, 7, 8, 9, 10], 'C': ['a', 'b', 'c', 'd', 'e']})
         result = df.max()
         expected = {'A': 5, 'B': 10}
         assert result == expected
