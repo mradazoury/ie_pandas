@@ -121,6 +121,43 @@ class DataFrame:
         )
         return returnString
 
+
+    def __add__(self,other):
+        """This dunder function adds the number after a + sign to every numerical column"""
+        for k in self.keys:
+            if np.issubdtype(np.array(self.df[k]).dtype, np.number):
+                if isinstance(self.df[k] , list):
+                    self.df[k] = list(np.array(self.df[k]) + other)
+                else:
+                    self.df[k] = self.df[k] + other
+                    
+    def __sub__(self,other):
+        """This dunder function substracts the number after a + sign to every numerical column"""
+        for k in self.keys:
+            if np.issubdtype(np.array(self.df[k]).dtype, np.number):
+                if isinstance(self.df[k] , list):
+                    self.df[k] = list(np.array(self.df[k]) - other)
+                else:
+                    self.df[k] = self.df[k] - other   
+                    
+    def __mul__(self,other):
+        """This dunder function multiplies the number after a + sign to every numerical column"""
+        for k in self.keys:
+            if np.issubdtype(np.array(self.df[k]).dtype, np.number):
+                if isinstance(self.df[k] , list):
+                    self.df[k] = list(np.array(self.df[k]) * other)
+                else:
+                    self.df[k] = self.df[k] * other 
+    
+    def __truediv__(self,other):
+        """This dunder function divides the number after a + sign to every numerical column"""
+        for k in self.keys:
+            if np.issubdtype(np.array(self.df[k]).dtype, np.number):
+                if isinstance(self.df[k] , list):
+                    self.df[k] = list(np.array(self.df[k]) / other)
+                else:
+                    self.df[k] = self.df[k] / other    
+
     def colnames(self):
         """ This method returns the name of columns"""
         l = []
@@ -128,13 +165,18 @@ class DataFrame:
             l.append(k)
         return l
 
-    def get_row(self, index_start, index_end):
+    def get_row(self, index_start, index_end = None):
         """ This method returns the cited rows"""
-        dummy = dict()
-        for k in self.keys:
-            dummy[k] = (self.df[k])[index_start:index_end]
+        d = []
+        if index_end == None:
+            for k in self.keys:
+                d.append((self.df[k])[index_start])
+        else:
+            for k in self.keys:
+                d.append((self.df[k])[index_start:index_end + 1])
+            d = list(map(list, zip(*d)))
 
-        return dummy
+        return d
 
     # mathematical functions
     def sum(self):  ### fix it to be just for numerical  -- done  --- works without ie_
@@ -168,3 +210,18 @@ class DataFrame:
             if np.issubdtype(np.array(self.df[k]).dtype, np.number):
                 d[k] = np.max(self.df[k])
         return d
+
+    def shape(self):
+        """This method returns a tuple of the number of rows and number of columns"""
+        
+        row = len(self.values[0])
+        col = len(self.keys)
+        l = (row , col)
+        return l
+    
+    def dtypes(self):
+        """This method returns the types of each of the columns in the DataFrame"""
+        s = ""
+        for k in self.keys:
+            s =  s + "{0}: {1}, ".format(k, type(self.df[k][0]).__name__ )
+        return s[:-2] 

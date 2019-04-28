@@ -69,3 +69,45 @@ def test_repr():
 def test_col_name(df, expected):
     """ Testing that colnames returns all the column names"""
     assert df.colnames() == expected
+
+@pytest.mark.parametrize(
+    "start,end,expected", [(0 ,1 , [["Georges", "Koury", 25],["Alexandre","Trump" ,26]]), (2,None ,["Kelly", "McKinsey", 30])]
+)
+def test_get_row(start , end , expected):
+  """Testing that get_row() gives back the rows inputed"""
+  if end == None:
+    assert _df.get_row(start) == expected
+  else:
+    assert _df.get_row(start,end) == expected
+
+def test_add_():
+  """Testug that the + sign will add the the next number to all the numerical columns"""
+  test = _df2['a'] 
+  _df2 + 5
+  assert np.unique(_df2['a'] == test + 5 ) == True
+
+def test_sub_():
+  """Testug that the - sign will substract the the next number to all the numerical columns"""
+  test = _df2['a'] 
+  _df2 - 5
+  assert np.unique(_df2['a'] == test - 5 ) == True
+
+def test_mul_():
+  """Testug that the * sign will add the the next number to all the numerical columns"""
+  test = _df2['a'] 
+  _df2 * 5
+  assert np.unique(_df2['a'] == test * 5 ) == True
+
+def test_div_():
+  """Testug that the / sign will divide the the next number to all the numerical columns"""
+  test = _df2['a'] 
+  _df2 / 5
+  assert np.unique(_df2['a'] == test / 5 ) == True
+
+def test_shape():
+  assert _df.shape() == (3,3)
+
+def dtypes():
+  """ Testing that the function dtypes returns the type of each of the columns"""
+  assert _df.dtypes() == 'name: str, Family: str, age: int'
+
