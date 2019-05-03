@@ -179,7 +179,7 @@ class DataFrame:
         return d
 
     # mathematical functions
-     def sum(self):  ### fix it to be just for numerical  -- done  --- works without ie_
+    def sum(self):  ### fix it to be just for numerical  -- done  --- works without ie_
         """ This method returns a dictionary including the sum of all columns"""
         d = []
         for k in self.keys:

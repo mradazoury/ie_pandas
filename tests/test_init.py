@@ -38,27 +38,27 @@ _df = DataFrame(_math_dic)
 def test_sum():
     ''' Test and compare the results from the sum function against the expected results'''
     result = _df.sum()
-    expected = {'A': 15, 'B': 40}
+    expected = [15 ,40]
     assert result == expected
     print("The results from the test max the expected results", expected)
 
 def test_median():
         ''' Test and compare the results from the median function against the expected results'''
         result = _df.median()
-        expected = {'A': 3, 'B': 8}
+        expected = [ 3 ,8]
         assert result == expected
         print("The results from the test match the expected results", expected)
         
 def test_min():
         ''' Test and compare the results from the min function against the expected results'''
         result = _df.min()
-        expected = {'A': 1, 'B': 6}
+        expected = [ 1 , 6]
         assert result == expected
         print("The results from the test match the expected results", expected)
         
 def test_max():
         ''' Test and compare the results from the max function against the expected results'''
         result = _df.max()
-        expected = {'A': 5, 'B': 10}
+        expected = [ 5 , 10 ]
         assert result == expected
         print("The results from the test match the expected results", expected)
