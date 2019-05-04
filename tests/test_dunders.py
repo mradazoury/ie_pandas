@@ -14,6 +14,9 @@ _dic2 = {"a": [3, 4, 5, 6], 1: [3, 4, 5, 6]}
 
 _df2 = DataFrame(_dic2)
 
+_dic3 = {"list" : [10 ,11 ,12, 13] , "numpy" : np.array([7,8,9,10]) , "str" : ['a' ,'b' ,'c' ,'d']}
+
+_df3 = DataFrame(_dic3)
 
 @pytest.mark.parametrize(
     "expected, colnames",
@@ -81,30 +84,31 @@ def test_get_row(start , end , expected):
     assert _df.get_row(start,end) == expected
 
 def test_add_():
-  """Testug that the + sign will add the the next number to all the numerical columns"""
-  test = _df2['a'] 
-  _df2 + 5
-  assert np.unique(_df2['a'] == test + 5 ) == True
+  """Testing that the + sign will add the next number to all the numerical columns"""
+  test = _df3['list']
+  _df3 + 5
+  assert np.unique(_df3['list'] == test + 5 ) == True
 
 def test_sub_():
-  """Testug that the - sign will substract the the next number to all the numerical columns"""
-  test = _df2['a'] 
-  _df2 - 5
-  assert np.unique(_df2['a'] == test - 5 ) == True
+  """Testing that the - sign will substract the next number from all the numerical columns"""
+  test = _df3['list']
+  _df3 - 5
+  assert np.unique(_df3['list'] == test - 5 ) == True
 
 def test_mul_():
-  """Testug that the * sign will add the the next number to all the numerical columns"""
-  test = _df2['a'] 
-  _df2 * 5
-  assert np.unique(_df2['a'] == test * 5 ) == True
+  """Testing that the * sign will multiply the next number with all the numerical columns"""
+  test = _df3['list'] 
+  _df3 * 5
+  assert np.unique(_df3['list' ]== test * 5 ) == True
 
 def test_div_():
-  """Testug that the / sign will divide the the next number to all the numerical columns"""
-  test = _df2['a'] 
-  _df2 / 5
-  assert np.unique(_df2['a'] == test / 5 ) == True
+  """Testing that the / sign will divide all the numerical columns by the next number"""
+  test = _df3['list']
+  _df3 / 5
+  assert np.unique(_df3['list'] == test / 5 ) == True
 
 def test_shape():
+  """Testing that the shape function returns the shape of the data frame (row , col)"""
   assert _df.shape() == (3,3)
 
 def dtypes():
