@@ -6,24 +6,32 @@ class DataFrame:
         df = df.copy()
         # checking the type to make sure it is a dicitonary
         if type(df) != dict:
-            raise ValueError("Wrong input type, Only dictionaries are acceptable")
+            raise ValueError(
+                "Wrong input type, \
+            Only dictionaries are acceptable"
+            )
 
-            # Only letting list and numpy array to be set as values in the dictionary
+            # Only letting list and numpy array to be
+            #  set as values in the dictionary
         for i in df.values():
             if isinstance(i, (list, np.ndarray)):
                 pass
             else:
                 raise ValueError(
-                    " Only dictionaries of list or Numpy array are acccepted"
+                    " Only dictionaries of list \
+                        or Numpy array are acccepted"
                 )
 
-        l = []
+        d = []
         for i in df.values():
-            l.append(len(i))
+            d.append(len(i))
 
         # making sure that all columns are of same length
-        if len(set(l)) > 1:
-            raise ValueError("Columns with unequal length are not accepted")
+        if len(set(d)) > 1:
+            raise ValueError(
+                "Columns with unequal length \
+                are not accepted"
+            )
 
         else:
             for i in df.values():
@@ -38,7 +46,7 @@ class DataFrame:
                             np.int_,
                             np.float_,
                             np.chararray,
-                            np.bool_,
+                            np.bool_
                         ),
                     )
                     for x in i
@@ -46,24 +54,28 @@ class DataFrame:
                     pass
                 else:
                     raise ValueError(
-                        "Wrong data type, Only integer, float, boolean and string are accepted"
+                        "Wrong data type, Only integer, float, \
+                            boolean and string are accepted"
                     )
         # Making sure that all values in a column are of the same type
         for i in df.values():
-            l = []
+            d = []
             for value in i:
-                l.append(type(value))
+                d.append(type(value))
 
-            if len(set(l)) > 1:
-                raise ValueError("All the values in a column should be the same")
+            if len(set(d)) > 1:
+                raise ValueError(
+                    "All the values in a column \
+                    should be the same"
+                )
 
             else:
                 self.df = df
                 self.keys = df.keys()
-                l = []
+                d = []
                 for v in df.values():
-                    l.append(v)
-                self.values = l
+                    d.append(v)
+                self.values = d
 
     def __getitem__(self, colname):
         """ This function returns the values of the called column"""
@@ -72,13 +84,15 @@ class DataFrame:
                 return np.array(self.df[colname])
             else:
                 raise IndexError(
-                    "Column Name does not exist, Please enter a correct column Name"
+                    "Column Name does not exist,\
+                         Please enter a correct column Name"
                 )
         elif isinstance(colname, (list, tuple)):
             for y in colname:
                 if y not in self.keys:
                     raise IndexError(
-                        "Column Name does not exist, Please enter a correct column Name"
+                        "Column Name does not exist,\
+                             Please enter a correct column Name"
                     )
                 else:
                     return np.array([np.array(self.df[x]) for x in colname])
@@ -92,24 +106,41 @@ class DataFrame:
         if len(value) == len(self.values[0]):
             pass
         else:
-            raise ValueError("Length of values does not match length of index")
+            raise ValueError(
+                "Length of values does \
+                not match length of index"
+            )
         if all(
             isinstance(
-                x, (int, float, str, bool, np.int_, np.float_, np.chararray, np.bool_)
+                x,
+                (
+                    int,
+                    float,
+                    str,
+                    bool,
+                    np.int_,
+                    np.float_,
+                    np.chararray,
+                    np.bool_
+                ),
             )
             for x in value
         ):
             pass
         else:
             raise ValueError(
-                "Wrong data type, Only integer, float, boolean and string are accepted"
+                "Wrong data type, Only integer, float,\
+                     boolean and string are accepted"
             )
 
-        l = []
+        d = []
         for i in value:
-            l.append(type(i))
-        if len(set(l)) > 1:
-            raise ValueError("All the values in a column should be of the same type")
+            d.append(type(i))
+        if len(set(d)) > 1:
+            raise ValueError(
+                "All the values in a column\
+                 should be of the same type"
+            )
         else:
             self.df[colname] = value
 
@@ -121,66 +152,70 @@ class DataFrame:
         )
         return returnString
 
-
-    def __add__(self,other):
-        """This dunder function adds the number after a + sign to every numerical column"""
+    def __add__(self, other):
+        """This dunder function adds the number \
+            after a + sign to every numerical column"""
         for k in self.keys:
             if np.issubdtype(np.array(self.df[k]).dtype, np.number):
-                if isinstance(self.df[k] , list):
+                if isinstance(self.df[k], list):
                     self.df[k] = list(np.array(self.df[k]) + other)
                 else:
                     self.df[k] = self.df[k] + other
-                    
-    def __sub__(self,other):
-        """This dunder function substracts the number after a + sign to every numerical column"""
+
+    def __sub__(self, other):
+        """This dunder function substracts the number \
+            after a + sign to every numerical column"""
         for k in self.keys:
             if np.issubdtype(np.array(self.df[k]).dtype, np.number):
-                if isinstance(self.df[k] , list):
+                if isinstance(self.df[k], list):
                     self.df[k] = list(np.array(self.df[k]) - other)
                 else:
-                    self.df[k] = self.df[k] - other   
-                    
-    def __mul__(self,other):
-        """This dunder function multiplies the number after a + sign to every numerical column"""
+                    self.df[k] = self.df[k] - other
+
+    def __mul__(self, other):
+        """This dunder function multiplies the number after\
+             a + sign to every numerical column"""
         for k in self.keys:
             if np.issubdtype(np.array(self.df[k]).dtype, np.number):
-                if isinstance(self.df[k] , list):
+                if isinstance(self.df[k], list):
                     self.df[k] = list(np.array(self.df[k]) * other)
                 else:
-                    self.df[k] = self.df[k] * other 
-    
-    def __truediv__(self,other):
-        """This dunder function divides the number after a + sign to every numerical column"""
+                    self.df[k] = self.df[k] * other
+
+    def __truediv__(self, other):
+        """This dunder function divides the number after\
+             a + sign to every numerical column"""
         for k in self.keys:
             if np.issubdtype(np.array(self.df[k]).dtype, np.number):
-                if isinstance(self.df[k] , list):
+                if isinstance(self.df[k], list):
                     self.df[k] = list(np.array(self.df[k]) / other)
                 else:
-                    self.df[k] = self.df[k] / other    
+                    self.df[k] = self.df[k] / other
 
     def colnames(self):
         """ This method returns the name of columns"""
-        l = []
+        d = []
         for k in self.keys:
-            l.append(k)
-        return l
+            d.append(k)
+        return d
 
-    def get_row(self, index_start, index_end = None):
+    def get_row(self, index_start, index_end=None):
         """ This method returns the cited rows"""
         d = []
-        if index_end == None:
+        if index_end is None:
             for k in self.keys:
                 d.append((self.df[k])[index_start])
         else:
             for k in self.keys:
-                d.append((self.df[k])[index_start:index_end + 1])
+                d.append((self.df[k])[index_start: index_end + 1])
             d = list(map(list, zip(*d)))
 
         return d
 
     # mathematical functions
-    def sum(self):  ### fix it to be just for numerical  -- done  --- works without ie_
-        """ This method returns a dictionary including the sum of all columns"""
+    def sum(self):
+        """ This method returns a dictionary \
+            including the sum of all columns"""
         d = []
         for k in self.keys:
             if np.issubdtype(np.array(self.df[k]).dtype, np.number):
@@ -188,7 +223,8 @@ class DataFrame:
         return d
 
     def median(self):
-        """ This method returns a dictionary including the median of all columns"""
+        """ This method returns a dictionary \
+            including the median of all columns"""
         d = []
         for k in self.keys:
             if np.issubdtype(np.array(self.df[k]).dtype, np.number):
@@ -196,7 +232,8 @@ class DataFrame:
         return d
 
     def min(self):
-        """ This method returns a dictionary including the min of all columns"""
+        """ This method returns a dictionary \
+            including the min of all columns"""
         d = []
         for k in self.keys:
             if np.issubdtype(np.array(self.df[k]).dtype, np.number):
@@ -204,7 +241,8 @@ class DataFrame:
         return d
 
     def max(self):
-        """ This method returns a dictionary including the max of all columns"""
+        """ This method returns a dictionary \
+            including the max of all columns"""
         d = []
         for k in self.keys:
             if np.issubdtype(np.array(self.df[k]).dtype, np.number):
@@ -212,16 +250,17 @@ class DataFrame:
         return d
 
     def shape(self):
-        """This method returns a tuple of the number of rows and number of columns"""
-        
+        """This method returns a tuple of the \
+            number of rows and number of columns"""
         row = len(self.values[0])
         col = len(self.keys)
-        l = (row , col)
-        return l
-    
+        d = (row, col)
+        return d
+
     def dtypes(self):
-        """This method returns the types of each of the columns in the DataFrame"""
+        """This method returns the types of each\
+             of the columns in the DataFrame"""
         s = ""
         for k in self.keys:
-            s =  s + "{0}: {1}, ".format(k, type(self.df[k][0]).__name__ )
-        return s[:-2] 
+            s = s + "{0}: {1}, ".format(k, type(self.df[k][0]).__name__)
+        return s[:-2]
