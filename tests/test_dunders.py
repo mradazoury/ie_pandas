@@ -39,7 +39,7 @@ _df3 = DataFrame(_dic3)
 def test_get_item(expected, colnames):
     """Testing two cases, one where only one column is \
         called and another one where two columns are called"""
-    assert np.unique(_df[colnames] == expected) is True
+    assert np.all(_df[colnames] == expected)
 
 
 def test_get_item_error():
@@ -51,8 +51,7 @@ def test_get_item_error():
 def test_set_item():
     """Testing that __setitem__ assigns a new column"""
     _df2["New_column"] = ["1", "2", "3", "4"]
-    assert np.unique(_df2["New_column"] ==
-                     np.array(["1", "2", "3", "4"])) is True
+    assert np.all(_df2["New_column"] == np.array(["1", "2", "3", "4"]))
 
 
 @pytest.mark.parametrize(
@@ -69,11 +68,9 @@ def test_set_item_errors(new_column):
 
 def test_repr():
     """ Testing that the representation is how we designed it"""
-    assert (
-        repr(_df)
-        == "['name', 'Family', 'age']\n[['Georges' 'Koury' 25]\n \
-            ['Alexandre' 'Trump' 26]\n ['Kelly' 'McKinsey' 30]]"
-    )
+    rep = "['name', 'Family', 'age']\n[['Georges' 'Koury' 25]\n \
+['Alexandre' 'Trump' 26]\n ['Kelly' 'McKinsey' 30]]"
+    assert (repr(_df) == rep)
 
 
 @pytest.mark.parametrize(
@@ -105,7 +102,7 @@ def test_add_():
         to all the numerical columns"""
     test = _df3["list"]
     _df3 + 5
-    assert np.unique(_df3["list"] == test + 5) is True
+    assert np.all(_df3["list"] == test + 5)
 
 
 def test_sub_():
@@ -113,7 +110,7 @@ def test_sub_():
          from all the numerical columns"""
     test = _df3["list"]
     _df3 - 5
-    assert np.unique(_df3["list"] == test - 5) is True
+    assert np.all(_df3["list"] == test - 5)
 
 
 def test_mul_():
@@ -121,7 +118,7 @@ def test_mul_():
          with all the numerical columns"""
     test = _df3["list"]
     _df3 * 5
-    assert np.unique(_df3["list"] == test * 5) is True
+    assert np.all(_df3["list"] == test * 5)
 
 
 def test_div_():
@@ -129,7 +126,7 @@ def test_div_():
         columns by the next number"""
     test = _df3["list"]
     _df3 / 5
-    assert np.unique(_df3["list"] == test / 5) is True
+    assert np.all(_df3["list"] == test / 5)
 
 
 def test_shape():
